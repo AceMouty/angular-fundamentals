@@ -8,21 +8,31 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
+import { FormsModule } from '@angular/forms';
+import { CoursesService } from './shared/services/courses.service';
+import { LessonsService } from './shared/services/lessons/lessons.service';
 
 @NgModule({
+  // imports for modules
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     MaterialModule,
     HttpClientModule
   ],
+  // declarations for components
   declarations: [
     AppComponent,
     HomeComponent,
     CoursesComponent
   ],
-  providers: [],
+  // providers for services
+  providers: [
+    CoursesService,
+    LessonsService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

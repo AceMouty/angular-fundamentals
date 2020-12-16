@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../shared/services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -6,19 +7,54 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  courses = [
-    {
-      id: 1,
-      title: 'Angular 9 Fundamentals',
-      description: 'Learn the fundamentals of Angular 9',
-      percentComplete: 26,
-      favorite: true
-    }
-  ];
+  // CHALLENGE
+  // STEP 01: Display courses using ngFor
+  // STEP 02: Add event handler to select course
+  // STEP 03: Display raw json of selected course
 
-  constructor() { }
+  courses = null;
+  selectedCourse = null;
+
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit(): void {
+    this.resetSelectedCourse();
+    this.courses = this.coursesService.getAll()
   }
 
+  resetSelectedCourse() {
+    const emptyCourse = {
+      id: null,
+      title: '',
+      description: '',
+      percentComplete: 0,
+      favorite: false
+    }
+
+    this.selectedCourse = emptyCourse;
+  }
+  setCourse(course) {
+    this.selectedCourse = course;
+  }
+
+  deleteCourse(courseId) {
+    this.coursesService.delete(courseId);
+  }
+
+  cancel() {
+    this.resetSelectedCourse();
+  }
+
+  saveCourse(course) {
+    if (course.id) {
+      this.coursesService.update(course);
+    } else {
+      this.coursesService.create(course);
+    }
+  }
+
+  setFavorite(checked: boolean) {
+    this.selectedCourse.favorite = checked;
+    console.log("CHECKED: ", checked)
+  }
 }
