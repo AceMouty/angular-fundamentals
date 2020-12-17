@@ -13,13 +13,6 @@
       "description": "Brian is amazing",
       "percentComplete": 0,
       "favorite": false
-    },
-    {
-      "id": 3,
-      "title": "GraphQL For The Masses",
-      "description": "Scott Moss is the Boss",
-      "percentComplete": 0,
-      "favorite": false
     }
   ]
 }

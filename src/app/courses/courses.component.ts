@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { CoursesService } from '../shared/services/courses.service';
 
 @Component({
@@ -11,6 +12,11 @@ export class CoursesComponent implements OnInit {
   // STEP 01: Display courses using ngFor
   // STEP 02: Add event handler to select course
   // STEP 03: Display raw json of selected course
+
+  // Challenge: HTTP Client
+  // Step 01: Complete remote update call
+  // Step 02: Complete remote delete call
+  // Step 03: Fix UI on completed submission
 
   courses = null;
   selectedCourse = null;
@@ -37,21 +43,28 @@ export class CoursesComponent implements OnInit {
     this.selectedCourse = course;
   }
 
-  deleteCourse(courseId) {
-    this.coursesService.delete(courseId);
+  deleteCourse(courseId, form: NgForm) {
+    console.log("COURSE ID: ", courseId)
+    this.coursesService.delete(courseId)
+      .subscribe(_ => this.loadCourses());
+    form.resetForm();
   }
 
-  cancel() {
+  cancel(form: NgForm) {
     this.resetSelectedCourse();
+    form.resetForm();
   }
 
-  saveCourse(course) {
+  saveCourse(course, form: NgForm) {
     if (course.id) {
-      this.coursesService.update(course);
+      this.coursesService.update(course)
+        .subscribe(_ => this.loadCourses());
     } else {
       this.coursesService.create(course)
         .subscribe(_ => this.loadCourses());
     }
+
+    form.resetForm();
   }
 
   loadCourses() {

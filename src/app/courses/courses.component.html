@@ -13,7 +13,7 @@
                         <h3 mat-line>{{ course.title }}</h3>
                         <p mat-line>{{ course.description }} </p>
                         <button mat-icon-button color="warn"
-                            (click)="deleteCourse(course.id);$event.stopImmediatePropagation()">
+                            (click)="deleteCourse(course.id, form);$event.stopImmediatePropagation()">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-list-item>
@@ -31,7 +31,7 @@
                 </mat-card-title>
             </mat-card-header>
             <!-- Using a form template via ngForm -->
-            <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
+            <form #form="ngForm" (submit)="saveCourse(selectedCourse, form)">
                 <mat-card-content>
                     <!-- COURSE FORM -->
                     <mat-form-field>
@@ -54,7 +54,7 @@
                 </mat-card-content>
                 <mat-card-actions>
                     <button [disabled]="form.invalid" type="submit" mat-button color="primary">Submit</button>
-                    <button type="button" mat-button (click)="cancel()">Cancel</button>
+                    <button type="button" mat-button (click)="cancel(form)">Cancel</button>
                     <!-- COURSE ACTIONS -->
                 </mat-card-actions>
             </form>
