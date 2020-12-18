@@ -39,23 +39,27 @@ export class CoursesComponent implements OnInit {
 
     this.selectedCourse = emptyCourse;
   }
+
   setCourse(course) {
     this.selectedCourse = course;
   }
 
-  deleteCourse(courseId, form: NgForm) {
+  deleteCourse(courseId) {
     console.log("COURSE ID: ", courseId)
     this.coursesService.delete(courseId)
       .subscribe(_ => this.loadCourses());
-    form.resetForm();
   }
 
   cancel(form: NgForm) {
+    // this.loadCourses();
+    // form.resetForm();
     this.resetSelectedCourse();
-    form.resetForm();
   }
 
-  saveCourse(course, form: NgForm) {
+  saveCourse(eventObj) {
+
+    const { course, form } = eventObj;
+
     if (course.id) {
       this.coursesService.update(course)
         .subscribe(_ => this.loadCourses());
