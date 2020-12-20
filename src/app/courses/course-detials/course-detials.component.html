@@ -1,8 +1,7 @@
 <mat-card>
-    <pre>{{ course | json }}</pre>
     <mat-card-header>
         <mat-card-title>
-            <span *ngIf="course.id; else courseAlt">{{course.title}}</span>
+            <span *ngIf="selectedCourse.id; else courseAlt">{{originalTitle}}</span>
             <ng-template #courseAlt>Select Course</ng-template>
         </mat-card-title>
     </mat-card-header>
@@ -11,20 +10,21 @@
         <mat-card-content>
 
             <mat-form-field>
-                <input matInput placeholder="Title" [(ngModel)]="course.title" type="text" name="title" required>
+                <input matInput placeholder="Title" [(ngModel)]="selectedCourse.title" type="text" name="title"
+                    required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Description" [(ngModel)]="course.description" type="text"
+                <input matInput placeholder="Description" [(ngModel)]="selectedCourse.description" type="text"
                     name="description">
             </mat-form-field>
             <section>
-                <h3>{{course.percentComplete}}% Complete</h3>
-                <mat-slider min="0" max="100" step="1.0" name="percentComplete" [(ngModel)]="course.percentComplete"
-                    thumbLabel value="">
+                <h3>{{selectedCourse.percentComplete}}% Complete</h3>
+                <mat-slider min="0" max="100" step="1.0" name="percentComplete"
+                    [(ngModel)]="selectedCourse.percentComplete" thumbLabel value="">
                 </mat-slider>
             </section>
             <section>
-                <mat-checkbox [(ngModel)]="course.favorite" name="favorite"></mat-checkbox>
+                <mat-checkbox [(ngModel)]="selectedCourse.favorite" name="favorite"></mat-checkbox>
             </section>
         </mat-card-content>
         <mat-card-actions>

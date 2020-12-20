@@ -52,7 +52,7 @@ export class CoursesComponent implements OnInit {
 
   cancel(form: NgForm) {
     // this.loadCourses();
-    // form.resetForm();
+    form.resetForm();
     this.resetSelectedCourse();
   }
 
